@@ -12,6 +12,9 @@ public class CenterRayInteract : MonoBehaviour
 
     public Camera cam;
 
+    public InteractShowText interShow;
+    public MonoBehaviour playerReference;
+
     void Start()
     {
 
@@ -20,6 +23,16 @@ public class CenterRayInteract : MonoBehaviour
     void Update()
     {
         DetectNearestInteractable();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Iinteractable active = playerReference as Iinteractable;
+            if (active != null && active.ActiveReturn())
+            {
+                interShow.Success();
+                interShow = null;
+                playerReference = null;
+            }
+        }
     }
 
     void DetectNearestInteractable()
@@ -49,8 +62,12 @@ public class CenterRayInteract : MonoBehaviour
             if (currentTarget != null)
             {
                 //Debug.Log("🎯 ใกล้ที่สุด: " + currentTarget.name);
-                InteractShowText interShow = currentTarget.GetComponent<InteractShowText>();
-                if (interShow != null) interShow.onFogus = true;
+                interShow = currentTarget.GetComponent<InteractShowText>();
+                if (interShow != null)
+                {
+                    interShow._onFogus = true;
+                    playerReference = interShow.onFogus();
+                }
 
             }
         }

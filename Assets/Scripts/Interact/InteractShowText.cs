@@ -1,13 +1,18 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractShowText : MonoBehaviour 
+public class InteractShowText : MonoBehaviour
 {
-    public bool onFogus = false;
+
+    public bool _onFogus = false;
+    public bool alreadyDone = false;
 
     public GameObject goText;
 
     public MonoBehaviour playerReference;
+
+    public UnityEvent onSuccess;
 
     private void Awake()
     {
@@ -17,17 +22,36 @@ public class InteractShowText : MonoBehaviour
         }
     }
 
+    public void Success()
+    {
+        alreadyDone = true;
+        onSuccess.Invoke();
+    }
+
     private void Update()
     {
-        if (goText != null && onFogus)
-        {
-            goText.SetActive(true);
-        }
-        else
-        {
-            goText.SetActive(false);
-        }
-        onFogus = false;
-
+        _onFogus = false;
+        onFogus();
     }
+    public MonoBehaviour onFogus()
+    {
+        if (!alreadyDone)
+        {
+            if (goText != null && _onFogus)
+            {
+                goText.SetActive(true);
+
+                return playerReference;
+            }
+            else
+            {
+                goText.SetActive(false);
+                return null;
+            }
+        }
+
+        return null;
+    }
+
+
 }
