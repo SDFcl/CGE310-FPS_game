@@ -1,11 +1,16 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     [SerializeField] int bulletAmount = 10;
     [SerializeField] int damage = 1;
+
+    [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private Transform shootPoint;
+
+    private float fireTimer;
 
     int currentBullet;
     public Action<int> OnChange;
@@ -19,6 +24,12 @@ public class Gun : MonoBehaviour
             shootPoint = GameObject.Find("ShottingPoint")?.transform;
         }
     }
+
+    void Update()
+    {
+        fireTimer -= Time.deltaTime;
+    }
+
     void Start()
     {
         currentBullet = bulletAmount;
@@ -26,6 +37,10 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
+        if(fireTimer > 0f) return;
+
+        fireTimer = fireRate;
+
         if (shootPoint == null)
         {
             Debug.LogWarning("shootPoint is null");
@@ -58,5 +73,11 @@ public class Gun : MonoBehaviour
     public void SetShootPoint(Transform point)
     {
         shootPoint = point;
+    }
+
+    IEnumerator FireRate()
+    {
+
+        yield return new WaitForSeconds(fireRate);
     }
 }
