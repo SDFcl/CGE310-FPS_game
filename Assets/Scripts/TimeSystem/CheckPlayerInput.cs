@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class TestPlayerInput : MonoBehaviour,IPlayerActivity
+public class CheckPlayerInput : MonoBehaviour,IPlayerActivity
 {
     Vector2 moveInput;
     Vector2 lookInput;
     bool isAction;
+    void Start()
+    {
+    }
 
     void Update()
     {

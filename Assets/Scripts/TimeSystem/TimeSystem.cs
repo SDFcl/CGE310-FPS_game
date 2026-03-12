@@ -19,7 +19,7 @@ public class TimeSystem : MonoBehaviour
 
     void Awake()
     {
-        activity = playerReference as IPlayerActivity;
+        activity = playerReference.GetComponent<IPlayerActivity>();
         baseFixedDeltaTime = Time.fixedDeltaTime;
     }
 
