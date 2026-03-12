@@ -13,8 +13,9 @@ public class ShowItem : MonoBehaviour
         {
             _isPickup = true;
 
-            GameObject itemHold = Instantiate(item, itemHoldPoint.position, itemHoldPoint.rotation, itemHoldPoint);
-            itemHolder = itemHold;
+            itemHolder = item;
+            itemHolder.transform.SetParent(itemHoldPoint);
+            itemHolder.transform.localPosition = Vector3.zero;
 
             return true;
         }

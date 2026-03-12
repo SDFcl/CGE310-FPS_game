@@ -225,7 +225,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3686740547398995174}
-  - component: {fileID: 1230163230099242673}
   - component: {fileID: 6191793528275686671}
   - component: {fileID: 984295972643579530}
   - component: {fileID: 5125946987791621405}
@@ -252,38 +251,6 @@ Transform:
   - {fileID: 6684969356730521042}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1230163230099242673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5422057069643133840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc52e47550d81548aebdacbbc662946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanInteract: 1
-  _onFogus: 0
-  alreadyDone: 0
-  goText: {fileID: 3430130634153655623}
-  playerReference: {fileID: 984295972643579530}
-  onSuccess:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5422057069643133840}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &6191793528275686671
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -317,8 +284,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cc9f5fde6030a4cb13fcaa5ce66eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showItem: {fileID: 0}
-  prefabGO: {fileID: 5422057069643133840}
+  _onFogus: 0
+  alreadyDone: 0
+  goHightLight: {fileID: 0}
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &5125946987791621405
 Rigidbody:
   m_ObjectHideFlags: 0

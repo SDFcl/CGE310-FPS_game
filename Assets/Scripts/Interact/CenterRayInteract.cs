@@ -8,12 +8,12 @@ public class CenterRayInteract : MonoBehaviour
     public LayerMask interactableLayer;
 
     [Header("Debug")]
-    public Transform currentTarget;
+    public GameObject currentTarget;
 
     public Camera cam;
 
-    public InteractShowText interShow;
-    public MonoBehaviour playerReference;
+    public ItemCanPickUp _interactable;
+    private GameObject playerReference;
 
     void Start()
     {
@@ -25,12 +25,13 @@ public class CenterRayInteract : MonoBehaviour
         DetectNearestInteractable();
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Iinteractable active = playerReference as Iinteractable;
+            Iinteractable active = currentTarget.GetComponent<Iinteractable>();
+            _interactable = currentTarget.GetComponent<ItemCanPickUp>();
             if (active != null && active.ActiveReturn())
             {
-                interShow.Success();
-                interShow = null;
-                playerReference = null;
+                _interactable.Success();
+                _interactable = null;
+                currentTarget = null;
             }
         }
     }
@@ -44,7 +45,7 @@ public class CenterRayInteract : MonoBehaviour
         {
             // หาอันที่ใกล้ที่สุดจากกล้อง
             float nearestDist = Mathf.Infinity;
-            Transform nearestTarget = null;
+            GameObject nearestTarget = null;
 
             foreach (var hit in hits)
             {
@@ -54,27 +55,40 @@ public class CenterRayInteract : MonoBehaviour
                 if (dist < nearestDist)
                 {
                     nearestDist = dist;
-                    nearestTarget = hit.collider.transform;
+                    nearestTarget = hit.collider.gameObject;
                 }
             }
 
-            currentTarget = nearestTarget;
-            if (currentTarget != null)
+            if (currentTarget != nearestTarget)
             {
-                //Debug.Log("🎯 ใกล้ที่สุด: " + currentTarget.name);
-                interShow = currentTarget.GetComponent<InteractShowText>();
-                if (interShow != null)
+                // ปิดของเก่า
+                if (currentTarget != null)
                 {
-                    interShow._onFogus = true;
-                    playerReference = interShow.onFogus();
+                    Iinteractable oldTarget = currentTarget.GetComponent<Iinteractable>();
+                    if (oldTarget != null)
+                        oldTarget.Active();
                 }
 
+                // เปิดของใหม่
+                if (nearestTarget != null)
+                {
+                    Iinteractable newTarget = nearestTarget.GetComponent<Iinteractable>();
+                    if (newTarget != null)
+                        newTarget.Active();
+                }
             }
+            currentTarget = nearestTarget;
         }
         else
         {
+            if (currentTarget != null)
+            {
+                Iinteractable oldTarget = currentTarget.GetComponent<Iinteractable>();
+                if (oldTarget != null)
+                    oldTarget.Active();
+            }
+
             currentTarget = null;
-            //Debug.Log("🎯 ไม่มีใกล้ที่สุด: ");
         }
     }
 
