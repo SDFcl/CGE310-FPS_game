@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6078240461877414369}
-  - component: {fileID: 1478888840394916003}
-  - component: {fileID: 4516592392823629619}
   - component: {fileID: 6184957544075047516}
   - component: {fileID: 4201898906973118157}
   - component: {fileID: 6223385467141505666}
@@ -38,51 +36,6 @@ Transform:
   - {fileID: 3717962689796413290}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1478888840394916003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5273462739449253935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc52e47550d81548aebdacbbc662946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onFogus: 0
-  alreadyDone: 0
-  goText: {fileID: 4094629623437512144}
-  playerReference: {fileID: 4516592392823629619}
-  onSuccess:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5273462739449253935}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4516592392823629619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5273462739449253935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42cc9f5fde6030a4cb13fcaa5ce66eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _showItem: {fileID: 0}
-  prefabGO: {fileID: 5273462739449253935}
 --- !u!65 &6184957544075047516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,7 +96,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2064908c7dd2a0041b767748fd3e80a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletAmount: 10
+  _onFogus: 0
+  alreadyDone: 0
+  goHightLight: {fileID: 4094629623437512144}
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4094629623437512144}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ammoAmount: 10
+  damage: 1
+  fireRate: 0.25
   shootPoint: {fileID: 0}
 --- !u!1001 &1141739432755491204
 PrefabInstance:
@@ -215,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bd1fd41c1949b604ebbb43e2ca4722f5, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -247,7 +220,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 429.97644, y: 82.34324, z: 267.35345}
   m_Center: {x: 12.512871, y: -0.30194473, z: 59.749382}
@@ -326,11 +299,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ecdc5548ecec33a49b8f0325a1868a77, type: 2}
     - target: {fileID: 919132149155446097, guid: bd1fd41c1949b604ebbb43e2ca4722f5, type: 3}
       propertyPath: m_Name
-      value: Gun_mesh (1)
+      value: HighLight
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bd1fd41c1949b604ebbb43e2ca4722f5, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bd1fd41c1949b604ebbb43e2ca4722f5, type: 3}
       propertyPath: m_IsActive
@@ -371,7 +344,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 429.97644, y: 82.34324, z: 267.35345}
   m_Center: {x: 12.512871, y: -0.30194473, z: 59.749382}

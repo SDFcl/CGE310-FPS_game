@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : ItemCanPickUp
 {
-    [SerializeField] int bulletAmount = 10;
+    [SerializeField] int ammoAmount = 10;
     [SerializeField] int damage = 1;
 
     [SerializeField] private float fireRate = 0.25f;
@@ -12,16 +12,24 @@ public class Gun : MonoBehaviour
 
     private float fireTimer;
 
-    int currentBullet;
-    public Action<int> OnChange;
-    public Action OnRunOut;
+    int currentAmmo;
+    public int CurrentAmmo => currentAmmo;
+    
+    public Action<int> OnAmmoChange;
+    public Action OnAmmoRunOut;
 
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (shootPoint == null)
         {
-            shootPoint = GameObject.Find("ShottingPoint")?.transform;
+            Transform found = transform.Find("PlayerCamera/ShottingPoint");
+
+            if (found != null)
+                shootPoint = found;
+            else
+                Debug.LogWarning("ShottingPointnot found!");
         }
     }
 
@@ -32,7 +40,7 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
-        currentBullet = bulletAmount;
+        currentAmmo = ammoAmount;
     }
 
     public void Shoot()
@@ -43,19 +51,19 @@ public class Gun : MonoBehaviour
 
         if (shootPoint == null)
         {
-            Debug.LogWarning("shootPoint is null");
+            Debug.LogWarning("shootPoint is null"); //เช็คว่ามีจุดยิงมั้ย
             return;
         }
 
         if(ObjectPooler.Instance == null)
         {
-            Debug.LogError("ObjectPooler not found");
+            Debug.LogError("ObjectPooler not found"); //เช็คว่ามี ObjectPool มั้ย
             return;
         }
 
-        if(currentBullet <= 0)
+        if(currentAmmo <= 0)
         {
-            OnRunOut?.Invoke();
+            OnAmmoRunOut?.Invoke();
             return;
         } 
 
@@ -66,18 +74,12 @@ public class Gun : MonoBehaviour
         );
         bullet.GetComponent<Bullet>().SetDamage(damage);
 
-        currentBullet --;
-        OnChange?.Invoke(currentBullet);
+        currentAmmo --;
+        OnAmmoChange?.Invoke(currentAmmo);
     }
 
     public void SetShootPoint(Transform point)
     {
         shootPoint = point;
-    }
-
-    IEnumerator FireRate()
-    {
-
-        yield return new WaitForSeconds(fireRate);
     }
 }

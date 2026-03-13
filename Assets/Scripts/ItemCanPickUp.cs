@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class ItemCanPickUp : Interactable , Iinteractable
 {
-    private ShowItem _showItem;
+    private PlayerPickup _playerPickup;
     private GameObject thisGameObj;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        _showItem = FindObjectOfType<ShowItem>();
+        _playerPickup = FindObjectOfType<PlayerPickup>();
         thisGameObj = this.gameObject;
         goHightLight.SetActive(false);
     }
@@ -16,7 +16,7 @@ public class ItemCanPickUp : Interactable , Iinteractable
     public bool ActiveReturn()
     {
         Debug.Log("Active ItemCanPickUp : " + gameObject.name);
-        return _showItem.setItem(thisGameObj);
+        return _playerPickup.setItem(thisGameObj);
     }
 
     public void Active()

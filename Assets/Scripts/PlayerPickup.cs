@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 
-public class ShowItem : MonoBehaviour
+public class PlayerPickup : MonoBehaviour
 {
     private bool _isPickup = false;
 
     public GameObject itemHolder;
     public Transform itemHoldPoint;
+
+    public Action OnPickup;
 
     public bool setItem(GameObject item)
     {
@@ -16,6 +19,7 @@ public class ShowItem : MonoBehaviour
             itemHolder = item;
             itemHolder.transform.SetParent(itemHoldPoint);
             itemHolder.transform.localPosition = Vector3.zero;
+            OnPickup?.Invoke();
 
             return true;
         }

@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
 
-public class ThrowItem : MonoBehaviour
+public class PlayerThrowItem : MonoBehaviour
 {
-    public ShowItem showItem;
+    public PlayerPickup showItem;
     public float throwForce = 10f;
 
     public Camera cam;
+    public Action OnThrow;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // »Ò´éÇÂ»ØèÁ G
+        if (Input.GetKeyDown(KeyCode.G)) // ï¿½Ò´ï¿½ï¿½Â»ï¿½ï¿½ï¿½ G
         {
             Throw();
         }
@@ -31,6 +33,7 @@ public class ThrowItem : MonoBehaviour
 
         rb.isKinematic = false;
         rb.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
+        OnThrow?.Invoke();
 
     }
 }

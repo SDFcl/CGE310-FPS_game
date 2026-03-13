@@ -214,11 +214,11 @@ GameObject:
   - component: {fileID: 7005655521994861566}
   - component: {fileID: 5431439388412574275}
   - component: {fileID: 7836643565831143856}
+  - component: {fileID: 1786083754002169922}
+  - component: {fileID: 1535149051895174118}
+  - component: {fileID: 4017432209520078620}
   - component: {fileID: 5572187383829212780}
   - component: {fileID: 5036314050332522300}
-  - component: {fileID: 1535149051895174118}
-  - component: {fileID: 1786083754002169922}
-  - component: {fileID: 4017432209520078620}
   m_Layer: 0
   m_Name: FirstPersonController
   m_TagString: Player
@@ -365,9 +365,8 @@ MonoBehaviour:
     m_Bits: 64
   currentTarget: {fileID: 0}
   cam: {fileID: 5744140474318136527}
-  interShow: {fileID: 0}
-  playerReference: {fileID: 0}
---- !u!114 &5572187383829212780
+  _interactable: {fileID: 0}
+--- !u!114 &1786083754002169922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,26 +375,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9188680027414405104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 137447b6443f6b84bb50c05f2aef4963, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f4f67f5c4ba534478dbf5b22a8b1d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemHolder: {fileID: 0}
-  itemHoldPoint: {fileID: 2404216667321163228}
---- !u!114 &5036314050332522300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9188680027414405104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4944a749acfb5bf4eafcbe31717b3ad3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showItem: {fileID: 5572187383829212780}
-  throwForce: 15
-  cam: {fileID: 5744140474318136527}
 --- !u!114 &1535149051895174118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,18 +434,6 @@ MonoBehaviour:
   joint: {fileID: 0}
   bobSpeed: 10
   bobAmount: {x: 0, y: 0.1, z: 0}
---- !u!114 &1786083754002169922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9188680027414405104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4f67f5c4ba534478dbf5b22a8b1d4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4017432209520078620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,5 +446,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2944e51ab7e982b48add28ecc095d706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdingitem: {fileID: 1582803765405087725}
-  fireRate: 0.15
+  holdingItem: {fileID: 0}
+--- !u!114 &5572187383829212780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188680027414405104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137447b6443f6b84bb50c05f2aef4963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemHolder: {fileID: 0}
+  itemHoldPoint: {fileID: 2404216667321163228}
+--- !u!114 &5036314050332522300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188680027414405104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4944a749acfb5bf4eafcbe31717b3ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showItem: {fileID: 5572187383829212780}
+  throwForce: 15
+  cam: {fileID: 5744140474318136527}
