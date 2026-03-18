@@ -19,6 +19,9 @@ public class PlayerPickup : MonoBehaviour
             itemHolder = item;
             itemHolder.transform.SetParent(itemHoldPoint);
             itemHolder.transform.localPosition = Vector3.zero;
+            itemHolder.transform.localRotation = Quaternion.identity;
+            itemHolder.transform.localScale = Vector3.one;
+            itemHolder.layer = LayerMask.NameToLayer("Default");
             OnPickup?.Invoke();
 
             return true;
