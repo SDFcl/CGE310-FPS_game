@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gun : ItemCanPickUp
 {
+    [Header("Gun Settings")]
     [SerializeField] int ammoAmount = 10;
     [SerializeField] int damage = 1;
 

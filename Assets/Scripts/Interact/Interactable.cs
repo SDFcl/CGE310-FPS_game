@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-
+    [Header("Interactable Settings")]
     public bool _onFogus = false;
     public bool alreadyDone = false;
 

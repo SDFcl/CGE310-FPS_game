@@ -23,7 +23,7 @@ public class CenterRayInteract : MonoBehaviour
     void Update()
     {
         DetectNearestInteractable();
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && currentTarget != null)
         {
             Iinteractable active = currentTarget.GetComponent<Iinteractable>();
             _interactable = currentTarget.GetComponent<ItemCanPickUp>();
