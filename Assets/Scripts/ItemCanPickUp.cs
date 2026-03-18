@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class ItemCanPickUp : Interactable , Iinteractable
 {
+
     private PlayerPickup _playerPickup;
     private GameObject thisGameObj;
+
+    [Header("Throw Setting")]
+    public GameObject throwablePrefab;
 
 
     protected virtual void Awake()

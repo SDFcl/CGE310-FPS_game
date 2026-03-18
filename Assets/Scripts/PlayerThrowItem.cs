@@ -6,7 +6,7 @@ public class PlayerThrowItem : MonoBehaviour
     public PlayerPickup showItem;
     public float throwForce = 10f;
 
-    public Camera cam;
+    public Transform throwPoint;
     public Action OnThrow;
 
     void Update()
@@ -17,7 +17,7 @@ public class PlayerThrowItem : MonoBehaviour
         }
     }
 
-    void Throw()
+    /*void Throw()
     {
         GameObject item = showItem.TakeItem();
 
@@ -35,5 +35,24 @@ public class PlayerThrowItem : MonoBehaviour
         rb.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
         OnThrow?.Invoke();
 
+    }*/
+
+    void Throw()
+    {
+        GameObject item = showItem.TakeItem();
+        if (item == null) return;
+
+        ItemCanPickUp itemCanPickUp = item.GetComponent<ItemCanPickUp>();
+        Destroy(item);
+
+        GameObject obj = Instantiate(itemCanPickUp.throwablePrefab, throwPoint.position, throwPoint.rotation);
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = item.AddComponent<Rigidbody>();
+        }
+        rb.isKinematic = false;
+        rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
+        OnThrow?.Invoke();
     }
 }
