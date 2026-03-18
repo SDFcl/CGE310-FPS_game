@@ -25,7 +25,10 @@ public class Bullet : MonoBehaviour,IPooledObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit damage = " + damage);
+        if(collision.gameObject.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.TakeDamage(0f); // 0f becuase Enemy one hit die
+        }
         gameObject.SetActive(false);
     }
     public void SetDamage(float value)
