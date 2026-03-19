@@ -33,11 +33,11 @@ public class EnemyMeleeAttackState : EnemyAttackStateBase
             else
             {
                 attackStart = true;
-                ctx.Animator.SetTrigger("Attack");
+                ctx.Animator.SetBool("CanAttack", true);
             }
         }
         
-        if (!ctx.IsAttackRange() || attackEnded)
+        if (!ctx.IsAttackRange() && attackEnded)
         {
             ctx.SM.ChangeState(ctx.ChaseState);
         }
@@ -53,14 +53,14 @@ public class EnemyMeleeAttackState : EnemyAttackStateBase
     //Unity Animation Event
     public override void OnAttackHit(Enemy ctx)
     {
-        Debug.Log("Attack Hit");
+        //Debug.Log("Attack Hit");
 
         enemyMelee.Hitbox.enabled = true;
     }
 
     public override void OnAttackEnd(Enemy ctx)
     {
-        Debug.Log("Attack End");
+        //Debug.Log("Attack End");
 
         enemyMelee.Hitbox.enabled = false;
         

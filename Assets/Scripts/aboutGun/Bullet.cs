@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour,IPooledObject
     {
         if(collision.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            damageable.TakeDamage(0f); // 0f becuase Enemy one hit die
+            damageable.TakeDamage(damage);
         }
         gameObject.SetActive(false);
     }

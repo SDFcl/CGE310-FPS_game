@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent NavMeshAgent {get; private set;}
     public Animator Animator{get; private set;}
     public float UpdateRate => updateRate;
+    public float LifeTimeBody => lifeTimeBody;
     
 
     [TextArea]
@@ -35,10 +36,12 @@ public class Enemy : MonoBehaviour
     [Tooltip("If Target out of Range enter IdleState")]
     [SerializeField] float idleRange = 10f;
 
+    [Header("Death")]
+    [SerializeField] float lifeTimeBody = 20f;
     
 
     //ObserverPattern
-    private EnemyHitHandle enemyHitHandle;
+    private EnemyHitHandle hitHandle;
 
     
     void Awake()
@@ -58,24 +61,28 @@ public class Enemy : MonoBehaviour
         Animator = GetComponent<Animator>();
 
         //ObserverPattern
-        enemyHitHandle = GetComponent<EnemyHitHandle>();
+        hitHandle = GetComponent<EnemyHitHandle>();
     }
     void OnDisable()
     {
-        enemyHitHandle.OnStun -= StunEnemy;
-        enemyHitHandle.HealthSystem.OnDied -= EnemyDie;
+        hitHandle.OnStun -= StunEnemy;
+        hitHandle.HealthSystem.OnDied -= EnemyDie;
     }
 
     void Start()
     {
-        enemyHitHandle.OnStun += StunEnemy;
-        enemyHitHandle.HealthSystem.OnDied += EnemyDie;
+        hitHandle.OnStun += StunEnemy;
+        hitHandle.HealthSystem.OnDied += EnemyDie;
 
         SM.Initialize(IdleState);
     }
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            
+        }
         SM.Tick();
     }
 
@@ -104,7 +111,7 @@ public class Enemy : MonoBehaviour
     // API Funtion
     public void StunEnemy()
     {
-        if(enemyHitHandle.HealthSystem.CurrentHP > 0)
+        if(hitHandle.HealthSystem.CurrentHP > 0)
             SM.ChangeState(StunState);
     }
 
@@ -135,14 +142,6 @@ public class Enemy : MonoBehaviour
         if (SM.CurrentState == StunState)
         {
             StunState.OnStunEnd(this);
-        }
-    }
-
-    public void Anmation_Death()
-    {
-        if(SM.CurrentState == DeathState)
-        {
-            DeathState.OnDie(this);
         }
     }
 

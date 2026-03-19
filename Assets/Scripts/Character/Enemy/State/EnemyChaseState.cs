@@ -10,6 +10,9 @@ public class EnemyChaseState : IState<Enemy>
 
     public void OnUpdate(Enemy ctx)
     {
+        bool isMoving = ctx.NavMeshAgent.velocity.sqrMagnitude > 0.01f;
+        ctx.Animator.SetBool("isMoving", isMoving);
+        
         timer += Time.deltaTime;
         if (timer >= ctx.UpdateRate)
         {
@@ -20,6 +23,10 @@ public class EnemyChaseState : IState<Enemy>
         if (ctx.IsAttackRange())
         {
             ctx.SM.ChangeState(ctx.AttackState);
+        }
+        else
+        {
+            ctx.Animator.SetBool("CanAttack",false);
         }
 
         if (ctx.IsIdleRange() && !ctx.LineOfSight.CanSeeTarget())
