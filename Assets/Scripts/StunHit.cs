@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StunOnHit : MonoBehaviour
+public class StunHit : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision)
     {

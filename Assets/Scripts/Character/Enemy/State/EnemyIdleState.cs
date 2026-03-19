@@ -5,8 +5,9 @@ public class EnemyIdleState : IState<Enemy>
     public void OnEnter(Enemy ctx)
     {
        //Debug.Log("IdleEnter");
-
+       
        ctx.NavMeshAgent.ResetPath();
+       ctx.Animator.SetBool("isMoving", false);
     }
 
     public void OnUpdate(Enemy ctx)

@@ -68,12 +68,15 @@ public class Gun : ItemCanPickUp
             return;
         } 
 
-        GameObject bullet = ObjectPooler.Instance.SpawnFromPool(
+        GameObject bulletObj = ObjectPooler.Instance.SpawnFromPool(
             "Bullet",
             shootPoint.position,
             shootPoint.rotation
         );
-        bullet.GetComponent<Bullet>().SetDamage(damage);
+
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.SetDamage(damage);
+        bullet.SetOwner(transform.root.gameObject);
 
         currentAmmo --;
         OnAmmoChange?.Invoke(currentAmmo);
@@ -82,5 +85,10 @@ public class Gun : ItemCanPickUp
     public void SetShootPoint(Transform point)
     {
         shootPoint = point;
+    }
+
+    public void SetAmmo(int setammo)
+    {
+        ammoAmount = setammo;
     }
 }

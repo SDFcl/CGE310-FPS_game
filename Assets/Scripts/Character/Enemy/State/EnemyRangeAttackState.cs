@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public class EnemyMeleeAttackState : EnemyAttackStateBase
+public class EnemyRangeAttackState : EnemyAttackStateBase
 {
     private bool attackStart;
     private bool attackEnded;
-    EnemyMelee enemyMelee;
+    EnemyRange enemyRange;
     public override void OnEnter(Enemy ctx)
     {
-       //Debug.Log("AttackEnter");
-       enemyMelee = ctx as EnemyMelee;
-       if (enemyMelee == null)
+    Debug.Log("AttackEnter");
+       enemyRange = ctx as EnemyRange;
+
+       if (enemyRange == null)
         {
             Debug.LogError("EnemyMeleeAttackState requires EnemyMelee context.");
             return;
@@ -24,11 +25,12 @@ public class EnemyMeleeAttackState : EnemyAttackStateBase
 
     public override void OnUpdate(Enemy ctx)
     {
-         if (!attackStart)
+        if (!attackStart)
         {
-            if (!ctx.IsFacingTarget())
+            if (!ctx.IsFacingTarget(0.0001f))
             {
-                ctx.RotateToTarget();
+                Debug.Log("Roatating");
+                ctx.RotateToTarget(90f);
             }
             else
             {
@@ -45,25 +47,20 @@ public class EnemyMeleeAttackState : EnemyAttackStateBase
 
     public override void OnExit(Enemy ctx)
     {
-        //Debug.Log("AttackExit");
+        Debug.Log("AttackExit");
         ctx.NavMeshAgent.updateRotation = true;
-        enemyMelee.Hitbox.enabled = false;
     }
 
     //Unity Animation Event
     public override void OnAttackHit(Enemy ctx)
     {
-        //Debug.Log("Attack Hit");
-
-        enemyMelee.Hitbox.enabled = true;
+        Debug.Log("Attack Hit");
+        enemyRange.Gun.Shoot();
     }
 
     public override void OnAttackEnd(Enemy ctx)
     {
         Debug.Log("Attack End");
-
-        enemyMelee.Hitbox.enabled = false;
-        
         attackEnded = true;
         attackStart = false;
     }

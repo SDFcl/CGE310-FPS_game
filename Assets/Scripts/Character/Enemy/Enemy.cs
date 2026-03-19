@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     private EnemyHitHandle hitHandle;
 
     
-    void Awake()
+    protected virtual void Awake()
     {
         //Create Reference for StatePattern
         SM = new StateMachine<Enemy>(this);
@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
         hitHandle.HealthSystem.OnDied -= EnemyDie;
     }
 
-    void Start()
+    protected virtual void Start()
     {
         hitHandle.OnStun += StunEnemy;
         hitHandle.HealthSystem.OnDied += EnemyDie;
@@ -146,7 +146,7 @@ public class Enemy : MonoBehaviour
     }
 
     //RotateEnemy
-    public void RotateToTarget()
+    public void RotateToTarget(float speedRotate = 360f)
     {
         Vector3 dir = LineOfSight.Target.position - transform.position;
         dir.y = 0f;
@@ -155,19 +155,20 @@ public class Enemy : MonoBehaviour
             return;
 
         Quaternion lookRot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 90f * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, speedRotate * Time.deltaTime);
     }
 
     public bool IsFacingTarget(float angleThreshold = 5f)
-    {
-        Vector3 dir = LineOfSight.Target.position - transform.position;
-        dir.y = 0f;
+{
+    Vector3 dir = LineOfSight.Target.position - transform.position;
+    dir.y = 0f;
 
-        if (dir.sqrMagnitude < 0.001f) return true;
+    if (dir.sqrMagnitude < 0.001f) return true;
 
-        float angle = Vector3.Angle(transform.forward, dir.normalized);
-        return angle <= angleThreshold;
-    }
+    float angle = Vector3.Angle(transform.forward, dir.normalized);
+    Debug.Log($"Angle to target = {angle}");
+    return angle <= angleThreshold;
+}
 
     //Debug
     void OnDrawGizmosSelected()

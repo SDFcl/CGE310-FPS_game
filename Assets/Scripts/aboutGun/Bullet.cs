@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour,IPooledObject
     [SerializeField] float lifeTime = 20f;
     Rigidbody rb;
     float damage;
+    private GameObject owner;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,6 +27,18 @@ public class Bullet : MonoBehaviour,IPooledObject
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject == owner)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (owner != null && collision.gameObject.CompareTag(owner.tag))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
         if(collision.gameObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(damage);
@@ -34,5 +48,9 @@ public class Bullet : MonoBehaviour,IPooledObject
     public void SetDamage(float value)
     {
         damage = value;
+    }
+    public void SetOwner(GameObject shooter)
+    {
+        owner = shooter;
     }
 }
