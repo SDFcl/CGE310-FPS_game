@@ -252,7 +252,7 @@ MonoBehaviour:
   ForcechaseRange: 3
   updateRate: 0.1
   attackRange: 10
-  idleRange: 10
+  idleRange: 25
   lifeTimeBody: 20
   gun: {fileID: 291908481378744371}
   shotingpoint: {fileID: 6885168178307678553}
