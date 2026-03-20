@@ -242,20 +242,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace37d3fce8631a4f890f0867a6811f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosDescription: 'Red is AttakRage
-
-    Bule is ForceChaseRage
-
-    Green is
-    IdleRage'
   showGizmos: 1
-  ForcechaseRange: 3
+  forceChaseRange: 3
   updateRate: 0.1
-  attackRange: 10
   idleRange: 25
   lifeTimeBody: 20
+  fistHitbox: {fileID: 7399240394499004496}
+  fistAttackRange: 1.5
   gun: {fileID: 291908481378744371}
-  shotingpoint: {fileID: 6885168178307678553}
+  shootingPoint: {fileID: 6885168178307678553}
+  attackRange: 10
+  hasWeapon: 1
 --- !u!1001 &3781964094489596076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,6 +605,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6499889929296628410, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5322868214053013336}
+    - targetCorrespondingSourceObject: {fileID: -5424213705957445524, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7399240394499004496}
+    - targetCorrespondingSourceObject: {fileID: -5424213705957445524, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1396460193228355936}
     - targetCorrespondingSourceObject: {fileID: 3897462237488877691, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6950333288970268862}
@@ -636,6 +639,45 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5494407688619893662}
   m_SourcePrefab: {fileID: 100100000, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+--- !u!1 &55571593527320768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5424213705957445524, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+  m_PrefabInstance: {fileID: 3781964094489596076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7399240394499004496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55571593527320768}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.35, z: 0.2}
+  m_Center: {x: 0.00000001791082, y: 0.14848575, z: -0.026870918}
+--- !u!114 &1396460193228355936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55571593527320768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e55e72dea8213c4a9b6a72997651a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &174141816521851095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3897462237488877691, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}

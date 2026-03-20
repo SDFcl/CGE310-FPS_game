@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2164962119029205758}
   - component: {fileID: 6939762248576102590}
   - component: {fileID: 3859587857583722615}
-  - component: {fileID: 652738660512297285}
   - component: {fileID: 9182220572652091327}
   - component: {fileID: 3996734154483747288}
+  - component: {fileID: 652738660512297285}
   m_Layer: 7
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -133,30 +133,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &652738660512297285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6216736454807960667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f600b258c2abd2e479d88ac74428dc67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGizmos: 1
-  forceChaseRange: 3
-  updateRate: 0.1
-  idleRange: 10
-  lifeTimeBody: 20
-  fistHitbox: {fileID: 3356291610610340983}
-  fistAttackRange: 1.5
-  fistRotateSpeed: 360
-  fistFacingThreshold: 5
-  weaponHitbox: {fileID: 8078374021570757105}
-  weaponAttackRange: 1.5
-  hasWeapon: 1
 --- !u!114 &9182220572652091327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +166,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364a49ef84af50043a1a64e1951694ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &652738660512297285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6216736454807960667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f600b258c2abd2e479d88ac74428dc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmos: 1
+  forceChaseRange: 3
+  updateRate: 0.1
+  idleRange: 10
+  lifeTimeBody: 20
+  fistHitbox: {fileID: 3356291610610340983}
+  fistAttackRange: 1.5
+  weaponHitbox: {fileID: 8078374021570757105}
+  weaponAttackRange: 1.5
+  hasWeapon: 1
 --- !u!1 &7827473333776171806
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +673,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8139853090755257685, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7829008024134662928}
+    - targetCorrespondingSourceObject: {fileID: -1693546492923637869, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1251058800022235572}
   m_SourcePrefab: {fileID: 100100000, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
 --- !u!4 &130524194318563007 stripped
 Transform:
@@ -1398,6 +1399,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollEnable: 0
+--- !u!1 &5244811771023586564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1693546492923637869, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+  m_PrefabInstance: {fileID: 2357072466490718871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1251058800022235572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244811771023586564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e55e72dea8213c4a9b6a72997651a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &6815117720963287495 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9088872756827976528, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
