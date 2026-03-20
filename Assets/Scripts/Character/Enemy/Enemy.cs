@@ -31,6 +31,15 @@ public class Enemy : MonoBehaviour
     [Header("Death")]
     [SerializeField] float lifeTimeBody = 20f;
 
+    [Header("Fallback Fist Attack")]
+    [SerializeField] private Collider fistHitbox;
+    [SerializeField] private float fistAttackRange = 1.5f;
+    private float fistRotateSpeed = 360f;
+    private float fistFacingThreshold = 5f;
+
+    public Collider FistHitbox => fistHitbox;
+    public float FistAttackRange => fistAttackRange;
+
     private EnemyHitHandle hitHandle;
 
     protected virtual void Awake()
@@ -66,7 +75,7 @@ public class Enemy : MonoBehaviour
         hitHandle.HealthSystem.OnDied -= EnemyDie;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         SM.Tick();
     }
@@ -151,6 +160,42 @@ public class Enemy : MonoBehaviour
 
         float angle = Vector3.Angle(transform.forward, dir.normalized);
         return angle <= angleThreshold;
+    }
+
+    public void SetAttackBehaviour(IEnemyAttack newBehaviour)
+    {
+        if (newBehaviour == null)
+        {
+            Debug.LogError($"{name} tried to set null AttackBehaviour");
+            return;
+        }
+
+        AttackBehaviour?.OnExit(this);
+        AttackBehaviour = newBehaviour;
+
+        if (SM != null && SM.CurrentState == AttackState)
+        {
+            AttackBehaviour.OnEnter(this);
+        }
+    }
+    public void UseFistAttack()
+    {
+        if (fistHitbox == null)
+        {
+            Debug.LogWarning($"{name} has no fistHitbox assigned.");
+            return;
+        }
+
+        Animator.SetBool("HasWeapon", false);
+
+        SetAttackBehaviour(
+            new MeleeAttackBehaviour(
+                fistHitbox,
+                fistAttackRange,
+                fistRotateSpeed,
+                fistFacingThreshold
+            )
+        );
     }
 
     void OnDrawGizmosSelected()

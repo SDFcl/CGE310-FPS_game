@@ -7,7 +7,11 @@ public class EnemyRange : Enemy
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private float attackRange = 8f;
 
+    [Header("State")]
+    [SerializeField] private bool hasWeapon = true;
+
     public Gun Gun => gun;
+    public bool HasWeapon => hasWeapon;
 
     protected override void Awake()
     {
@@ -23,12 +27,47 @@ public class EnemyRange : Enemy
     {
         base.Start();
 
+        if (gun == null || shootingPoint == null)
+            return;
+
         gun.SetShootPoint(shootingPoint);
         gun.SetAmmo(999999);
+
+        Animator.SetBool("HasWeapon", hasWeapon);
     }
 
     protected override void ConfigureAttackBehaviour()
     {
-        AttackBehaviour = new RangeAttackBehaviour(this, attackRange);
+        if (hasWeapon)
+        {
+            AttackBehaviour = new RangeAttackBehaviour(gun, attackRange);
+        }
+        else
+        {
+            UseFistAttack(); // ใช้ของกลางจาก Enemy
+        }
+    }
+
+    public void DropWeapon()
+    {
+        if (!hasWeapon) return;
+
+        hasWeapon = false;
+
+        if (gun != null)
+            gun.gameObject.SetActive(false);
+
+        UseFistAttack();
+    }
+
+    // test
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            DropWeapon();
+        }
     }
 }

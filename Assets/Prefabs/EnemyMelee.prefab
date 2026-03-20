@@ -145,21 +145,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f600b258c2abd2e479d88ac74428dc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosDescription: 'Red is AttakRage
-
-    Bule is ForceChaseRage
-
-    Green is
-    IdleRage
-
-    Yellow is LineOFSight'
   showGizmos: 1
-  ForcechaseRange: 3
+  forceChaseRange: 3
   updateRate: 0.1
-  attackRange: 1.5
   idleRange: 10
   lifeTimeBody: 20
-  hitbox: {fileID: 8078374021570757105}
+  fistHitbox: {fileID: 3356291610610340983}
+  fistAttackRange: 1.5
+  fistRotateSpeed: 360
+  fistFacingThreshold: 5
+  weaponHitbox: {fileID: 8078374021570757105}
+  weaponAttackRange: 1.5
+  hasWeapon: 1
 --- !u!114 &9182220572652091327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +642,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6499889929296628410, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7426867701059024294}
+    - targetCorrespondingSourceObject: {fileID: -5424213705957445524, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3356291610610340983}
+    - targetCorrespondingSourceObject: {fileID: -5424213705957445524, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5519668844575724638}
     - targetCorrespondingSourceObject: {fileID: 3897462237488877691, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1042883725198978951}
@@ -678,6 +681,45 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2412161367050800168, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
   m_PrefabInstance: {fileID: 2357072466490718871}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1445464938550233851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5424213705957445524, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}
+  m_PrefabInstance: {fileID: 2357072466490718871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3356291610610340983
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445464938550233851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.35, z: 0.2}
+  m_Center: {x: 0.00000001791082, y: 0.14848575, z: -0.026870918}
+--- !u!114 &5519668844575724638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445464938550233851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e55e72dea8213c4a9b6a72997651a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &1630463228130519788 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3897462237488877691, guid: 6d654176b4eee6d44bb5c0ff04af0133, type: 3}

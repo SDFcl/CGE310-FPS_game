@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MeleeAttackBehaviour : IEnemyAttack
 {
-    private readonly EnemyMelee enemyMelee;
+    private readonly Collider hitbox;
 
     private bool attackStart;
     private bool attackEnded;
@@ -12,12 +12,12 @@ public class MeleeAttackBehaviour : IEnemyAttack
     private readonly float facingThreshold;
 
     public MeleeAttackBehaviour(
-        EnemyMelee enemyMelee,
+        Collider hitbox,
         float attackRange,
         float rotateSpeed = 360f,
         float facingThreshold = 5f)
     {
-        this.enemyMelee = enemyMelee;
+        this.hitbox = hitbox;
         this.attackRange = attackRange;
         this.rotateSpeed = rotateSpeed;
         this.facingThreshold = facingThreshold;
@@ -33,8 +33,8 @@ public class MeleeAttackBehaviour : IEnemyAttack
         ctx.NavMeshAgent.ResetPath();
         ctx.NavMeshAgent.updateRotation = false;
 
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = false;
+        if (hitbox != null)
+            hitbox.enabled = false;
     }
 
     public void OnUpdate(Enemy ctx)
@@ -52,7 +52,7 @@ public class MeleeAttackBehaviour : IEnemyAttack
             }
         }
 
-        if (attackEnded)
+        if (!ctx.IsAttackRange() && attackEnded)
         {
             ctx.SM.ChangeState(ctx.ChaseState);
         }
@@ -61,24 +61,21 @@ public class MeleeAttackBehaviour : IEnemyAttack
     public void OnExit(Enemy ctx)
     {
         ctx.NavMeshAgent.updateRotation = true;
-        ctx.Animator.SetBool("CanAttack", false);
 
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = false;
+        if (hitbox != null)
+            hitbox.enabled = false;
     }
 
     public void OnAttackHit(Enemy ctx)
     {
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = true;
+        if (hitbox != null)
+            hitbox.enabled = true;
     }
 
     public void OnAttackEnd(Enemy ctx)
     {
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = false;
-
-        ctx.Animator.SetBool("CanAttack", false);
+        if (hitbox != null)
+            hitbox.enabled = false;
 
         attackEnded = true;
         attackStart = false;

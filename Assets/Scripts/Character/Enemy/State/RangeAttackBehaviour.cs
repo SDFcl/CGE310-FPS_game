@@ -2,25 +2,16 @@ using UnityEngine;
 
 public class RangeAttackBehaviour : IEnemyAttack
 {
-    private readonly EnemyRange enemyRange;
+    private readonly Gun gun;
+    private readonly float attackRange;
 
     private bool attackStart;
     private bool attackEnded;
 
-    private readonly float attackRange;
-    private readonly float rotateSpeed;
-    private readonly float facingThreshold;
-
-    public RangeAttackBehaviour(
-        EnemyRange enemyRange,
-        float attackRange,
-        float rotateSpeed = 90f,
-        float facingThreshold = 0.0001f)
+    public RangeAttackBehaviour(Gun gun, float attackRange)
     {
-        this.enemyRange = enemyRange;
+        this.gun = gun;
         this.attackRange = attackRange;
-        this.rotateSpeed = rotateSpeed;
-        this.facingThreshold = facingThreshold;
     }
 
     public float GetAttackRange() => attackRange;
@@ -38,9 +29,9 @@ public class RangeAttackBehaviour : IEnemyAttack
     {
         if (!attackStart)
         {
-            if (!ctx.IsFacingTarget(facingThreshold))
+            if (!ctx.IsFacingTarget(0.1f))
             {
-                ctx.RotateToTarget(rotateSpeed);
+                ctx.RotateToTarget(180f);
             }
             else
             {
@@ -49,7 +40,7 @@ public class RangeAttackBehaviour : IEnemyAttack
             }
         }
 
-        if (attackEnded && !ctx.IsAttackRange())
+        if (!ctx.IsAttackRange() && attackEnded)
         {
             ctx.SM.ChangeState(ctx.ChaseState);
         }
@@ -58,18 +49,16 @@ public class RangeAttackBehaviour : IEnemyAttack
     public void OnExit(Enemy ctx)
     {
         ctx.NavMeshAgent.updateRotation = true;
-        ctx.Animator.SetBool("CanAttack", false);
     }
 
     public void OnAttackHit(Enemy ctx)
     {
-        enemyRange.Gun.Shoot();
+        if (gun != null)
+            gun.Shoot();
     }
 
     public void OnAttackEnd(Enemy ctx)
     {
-        ctx.Animator.SetBool("CanAttack", false);
-
         attackEnded = true;
         attackStart = false;
     }
