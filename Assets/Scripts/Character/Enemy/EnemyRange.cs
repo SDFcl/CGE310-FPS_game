@@ -60,8 +60,8 @@ public class EnemyRange : Enemy
         UseFistAttack();
     }
 
-    // test
-    /*protected override void Update()
+    
+    protected override void Update()
     {
         base.Update();
 
@@ -69,5 +69,5 @@ public class EnemyRange : Enemy
         {
             DropWeapon();
         }
-    }*/
+    }
 }

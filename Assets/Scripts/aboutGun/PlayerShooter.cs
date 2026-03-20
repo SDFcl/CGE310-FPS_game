@@ -47,9 +47,9 @@ public class PlayerShooter : MonoBehaviour
     void PickGun()
     {
         Gun gun = holdingItem.GetComponentInChildren<Gun>();
-        gun.SetShootPoint(shottingPoint);
          if (gun != CurrentGun)
             {
+                gun.SetShootPoint(shottingPoint);
                 CurrentGun = gun;
                 OnChangeGun?.Invoke(CurrentGun);
             }
