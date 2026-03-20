@@ -55,13 +55,13 @@ public class EnemyRange : Enemy
         hasWeapon = false;
 
         if (gun != null)
-            gun.gameObject.SetActive(false);
+            gun.gameObject.transform.parent = null;
 
         UseFistAttack();
     }
 
     // test
-    protected override void Update()
+    /*protected override void Update()
     {
         base.Update();
 
@@ -69,5 +69,5 @@ public class EnemyRange : Enemy
         {
             DropWeapon();
         }
-    }
+    }*/
 }
