@@ -1,32 +1,34 @@
 using UnityEngine;
 
 public class EnemyRange : Enemy
-{   
+{
     [Header("Attack")]
-    [Tooltip("Enemy's Gun for do damage reference")]
     [SerializeField] private Gun gun;
-    [SerializeField] private Transform shotingpoint;
+    [SerializeField] private Transform shootingPoint;
+    [SerializeField] private float attackRange = 8f;
 
     public Gun Gun => gun;
-
-    protected override void ChangeAttackState()
-    {
-        AttackState = new EnemyRangeAttackState();
-    }
 
     protected override void Awake()
     {
         base.Awake();
-        if(gun == null || shotingpoint == null)
+
+        if (gun == null || shootingPoint == null)
         {
-            Debug.LogError("forgot to add reference in EnemyRange");
+            Debug.LogError("Forgot to assign gun or shootingPoint in EnemyRange");
         }
     }
 
     protected override void Start()
     {
         base.Start();
-        gun.SetShootPoint(shotingpoint);
+
+        gun.SetShootPoint(shootingPoint);
         gun.SetAmmo(999999);
+    }
+
+    protected override void ConfigureAttackBehaviour()
+    {
+        AttackBehaviour = new RangeAttackBehaviour(this, attackRange);
     }
 }

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MeleeAttackBehaviour : IEnemyAttack
+public class RangeAttackBehaviour : IEnemyAttack
 {
-    private readonly EnemyMelee enemyMelee;
+    private readonly EnemyRange enemyRange;
 
     private bool attackStart;
     private bool attackEnded;
@@ -11,13 +11,13 @@ public class MeleeAttackBehaviour : IEnemyAttack
     private readonly float rotateSpeed;
     private readonly float facingThreshold;
 
-    public MeleeAttackBehaviour(
-        EnemyMelee enemyMelee,
+    public RangeAttackBehaviour(
+        EnemyRange enemyRange,
         float attackRange,
-        float rotateSpeed = 360f,
-        float facingThreshold = 5f)
+        float rotateSpeed = 90f,
+        float facingThreshold = 0.0001f)
     {
-        this.enemyMelee = enemyMelee;
+        this.enemyRange = enemyRange;
         this.attackRange = attackRange;
         this.rotateSpeed = rotateSpeed;
         this.facingThreshold = facingThreshold;
@@ -32,9 +32,6 @@ public class MeleeAttackBehaviour : IEnemyAttack
 
         ctx.NavMeshAgent.ResetPath();
         ctx.NavMeshAgent.updateRotation = false;
-
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = false;
     }
 
     public void OnUpdate(Enemy ctx)
@@ -52,7 +49,7 @@ public class MeleeAttackBehaviour : IEnemyAttack
             }
         }
 
-        if (attackEnded)
+        if (attackEnded && !ctx.IsAttackRange())
         {
             ctx.SM.ChangeState(ctx.ChaseState);
         }
@@ -62,22 +59,15 @@ public class MeleeAttackBehaviour : IEnemyAttack
     {
         ctx.NavMeshAgent.updateRotation = true;
         ctx.Animator.SetBool("CanAttack", false);
-
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = false;
     }
 
     public void OnAttackHit(Enemy ctx)
     {
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = true;
+        enemyRange.Gun.Shoot();
     }
 
     public void OnAttackEnd(Enemy ctx)
     {
-        if (enemyMelee.Hitbox != null)
-            enemyMelee.Hitbox.enabled = false;
-
         ctx.Animator.SetBool("CanAttack", false);
 
         attackEnded = true;

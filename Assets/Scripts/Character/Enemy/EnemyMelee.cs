@@ -1,16 +1,15 @@
 using UnityEngine;
 
 public class EnemyMelee : Enemy
-{   
+{
     [Header("Attack")]
-    [Tooltip("Enemy's Hixbox for do damage reference")]
-    [SerializeField] Collider hitbox;
+    [SerializeField] private Collider hitbox;
+    [SerializeField] private float attackRange = 2.5f;
 
     public Collider Hitbox => hitbox;
 
-    protected override void ChangeAttackState()
+    protected override void ConfigureAttackBehaviour()
     {
-        AttackState = new EnemyMeleeAttackState();
+        AttackBehaviour = new MeleeAttackBehaviour(this, attackRange);
     }
-    
 }
