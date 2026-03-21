@@ -24,6 +24,11 @@ public class Interactable : MonoBehaviour
     {
         alreadyDone = true;
         onSuccess.Invoke();
+        _onFogus = false;
+        if (goHightLight != null)
+        {
+            goHightLight.SetActive(false);
+        }
     }
     
 

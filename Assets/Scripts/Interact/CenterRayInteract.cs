@@ -12,9 +12,6 @@ public class CenterRayInteract : MonoBehaviour
 
     public Camera cam;
 
-    public ItemCanPickUp _interactable;
-    private GameObject playerReference;
-
     void Start()
     {
 
@@ -26,12 +23,21 @@ public class CenterRayInteract : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && currentTarget != null)
         {
             Iinteractable active = currentTarget.GetComponent<Iinteractable>();
-            _interactable = currentTarget.GetComponent<ItemCanPickUp>();
-            if (active != null && active.ActiveReturn())
+            ItemCanPickUp _itemCanPickUp = currentTarget.GetComponent<ItemCanPickUp>();
+            if (active != null && _itemCanPickUp != null && active.ActiveReturn())
             {
-                _interactable.Success();
-                _interactable = null;
+                _itemCanPickUp.Success();
+                _itemCanPickUp = null;
                 currentTarget = null;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E) && currentTarget != null)
+        {
+            Iinteractable active = currentTarget.GetComponent<Iinteractable>();
+            ObjCanInteract _objCanInteract = currentTarget.GetComponent<ObjCanInteract>();
+            if (active != null && _objCanInteract != null)
+            {
+                _objCanInteract.ActiveReturn();
             }
         }
     }
