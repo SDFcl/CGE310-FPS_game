@@ -13,6 +13,9 @@ public class EnemyRange : Enemy
     public Gun Gun => gun;
     public bool HasWeapon => hasWeapon;
 
+    //observerPattern
+    private EnemyHitHandle enemyHit;
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,6 +24,12 @@ public class EnemyRange : Enemy
         {
             Debug.LogError("Forgot to assign gun or shootingPoint in EnemyRange");
         }
+        enemyHit = GetComponent<EnemyHitHandle>();
+    }
+    void OnDisable()
+    {
+        enemyHit.OnStun -= DropWeapon;
+        enemyHit.HealthSystem.OnDied -= DropWeapon;
     }
 
     protected override void Start()
@@ -29,6 +38,9 @@ public class EnemyRange : Enemy
 
         if (gun == null || shootingPoint == null)
             return;
+
+        enemyHit.OnStun += DropWeapon;
+        enemyHit.HealthSystem.OnDied += DropWeapon;
 
         gun.SetShootPoint(shootingPoint);
         gun.SetAmmo(999999);
@@ -54,20 +66,9 @@ public class EnemyRange : Enemy
 
         hasWeapon = false;
 
-        if (gun != null)
-            gun.gameObject.transform.parent = null;
-
+        gun.SetAmmo(10);
+        gun.SetShootPoint(null);
+        gun = null;
         UseFistAttack();
-    }
-
-    
-    protected override void Update()
-    {
-        base.Update();
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            DropWeapon();
-        }
     }
 }

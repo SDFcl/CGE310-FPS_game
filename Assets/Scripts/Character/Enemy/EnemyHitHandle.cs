@@ -5,9 +5,14 @@ public class EnemyHitHandle : MonoBehaviour,IDamageable,IStunable
 {
     public HealthSystem HealthSystem {get; private set;}
     public Action OnStun;
+    bool finishDrop;
     void Awake()
     {
         HealthSystem = new(1f);
+    }
+    void Start()
+    {
+        finishDrop = true;
     }
     public void TakeDamage(float _)
     {

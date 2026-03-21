@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class RagdollController : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class RagdollController : MonoBehaviour
     private bool _lastRagdollState;
     void Awake()
     {
-        _ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
-        _ragdollCollider = GetComponentsInChildren<Collider>();
+        _ragdollRigidbodies = GetComponentsInChildren<Rigidbody>(true)
+            .Where(rb => rb.CompareTag("RagDoll"))
+            .ToArray();
 
-        ragdollEnable = false;
-        _lastRagdollState = ragdollEnable;
+        _ragdollCollider = GetComponentsInChildren<Collider>(true)
+            .Where(col => col.CompareTag("RagDoll"))
+            .ToArray();
 
         DisableRagdoll();
     }

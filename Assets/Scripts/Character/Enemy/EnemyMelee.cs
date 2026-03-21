@@ -12,9 +12,26 @@ public class EnemyMelee : Enemy
     public bool HasWeapon => hasWeapon;
     public Collider WeaponHitbox => weaponHitbox;
 
+    //observerPattern
+    private EnemyHitHandle enemyHit;
+    protected override void Awake()
+    {
+        base.Awake();
+        enemyHit = GetComponent<EnemyHitHandle>();
+    }
+    void OnDisable()
+    {
+        enemyHit.OnStun -= DropWeapon;
+        enemyHit.HealthSystem.OnDied -= DropWeapon;
+    }
+
     protected override void Start()
     {
         base.Start();
+        
+        enemyHit.OnStun += DropWeapon;
+        enemyHit.HealthSystem.OnDied += DropWeapon;
+
         Animator.SetBool("HasWeapon", hasWeapon);
     }
 
@@ -40,15 +57,5 @@ public class EnemyMelee : Enemy
             weaponHitbox.gameObject.SetActive(false);
 
         UseFistAttack();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            DropWeapon();
-        }
     }
 }
