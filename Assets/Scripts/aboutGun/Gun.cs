@@ -32,6 +32,7 @@ public class Gun : ItemCanPickUp
             else
                 Debug.LogWarning("ShottingPointnot found!");
         }
+        currentAmmo = ammoAmount;
     }
 
     void Update()
@@ -41,7 +42,7 @@ public class Gun : ItemCanPickUp
 
     void Start()
     {
-        currentAmmo = ammoAmount;
+        
     }
 
     public void Shoot()
@@ -89,6 +90,6 @@ public class Gun : ItemCanPickUp
 
     public void SetAmmo(int setammo)
     {
-        ammoAmount = setammo;
+        currentAmmo = setammo;
     }
 }

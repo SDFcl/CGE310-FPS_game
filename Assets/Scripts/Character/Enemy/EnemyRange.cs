@@ -1,32 +1,74 @@
 using UnityEngine;
 
 public class EnemyRange : Enemy
-{   
+{
     [Header("Attack")]
-    [Tooltip("Enemy's Gun for do damage reference")]
     [SerializeField] private Gun gun;
-    [SerializeField] private Transform shotingpoint;
+    [SerializeField] private Transform shootingPoint;
+    [SerializeField] private float attackRange = 8f;
+
+    [Header("State")]
+    [SerializeField] private bool hasWeapon = true;
 
     public Gun Gun => gun;
+    public bool HasWeapon => hasWeapon;
 
-    protected override void ChangeAttackState()
-    {
-        AttackState = new EnemyRangeAttackState();
-    }
+    //observerPattern
+    private EnemyHitHandle enemyHit;
 
     protected override void Awake()
     {
         base.Awake();
-        if(gun == null || shotingpoint == null)
+
+        if (gun == null || shootingPoint == null)
         {
-            Debug.LogError("forgot to add reference in EnemyRange");
+            Debug.LogError("Forgot to assign gun or shootingPoint in EnemyRange");
         }
+        enemyHit = GetComponent<EnemyHitHandle>();
+    }
+    void OnDisable()
+    {
+        enemyHit.OnStun -= DropWeapon;
+        enemyHit.HealthSystem.OnDied -= DropWeapon;
     }
 
     protected override void Start()
     {
         base.Start();
-        gun.SetShootPoint(shotingpoint);
+
+        if (gun == null || shootingPoint == null)
+            return;
+
+        enemyHit.OnStun += DropWeapon;
+        enemyHit.HealthSystem.OnDied += DropWeapon;
+
+        gun.SetShootPoint(shootingPoint);
         gun.SetAmmo(999999);
+
+        Animator.SetBool("HasWeapon", hasWeapon);
+    }
+
+    protected override void ConfigureAttackBehaviour()
+    {
+        if (hasWeapon)
+        {
+            AttackBehaviour = new RangeAttackBehaviour(gun, attackRange);
+        }
+        else
+        {
+            UseFistAttack(); // ใช้ของกลางจาก Enemy
+        }
+    }
+
+    public void DropWeapon()
+    {
+        if (!hasWeapon) return;
+
+        hasWeapon = false;
+
+        gun.SetAmmo(10);
+        gun.SetShootPoint(null);
+        gun = null;
+        UseFistAttack();
     }
 }

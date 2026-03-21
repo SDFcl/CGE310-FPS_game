@@ -1,16 +1,61 @@
 using UnityEngine;
 
 public class EnemyMelee : Enemy
-{   
-    [Header("Attack")]
-    [Tooltip("Enemy's Hixbox for do damage reference")]
-    [SerializeField] Collider hitbox;
+{
+    [Header("Weapon Attack")]
+    [SerializeField] private Collider weaponHitbox;
+    [SerializeField] private float weaponAttackRange = 2.5f;
 
-    public Collider Hitbox => hitbox;
+    [Header("State")]
+    [SerializeField] private bool hasWeapon = true;
 
-    protected override void ChangeAttackState()
+    public bool HasWeapon => hasWeapon;
+    public Collider WeaponHitbox => weaponHitbox;
+
+    //observerPattern
+    private EnemyHitHandle enemyHit;
+    protected override void Awake()
     {
-        AttackState = new EnemyMeleeAttackState();
+        base.Awake();
+        enemyHit = GetComponent<EnemyHitHandle>();
     }
-    
+    void OnDisable()
+    {
+        enemyHit.OnStun -= DropWeapon;
+        enemyHit.HealthSystem.OnDied -= DropWeapon;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        
+        enemyHit.OnStun += DropWeapon;
+        enemyHit.HealthSystem.OnDied += DropWeapon;
+
+        Animator.SetBool("HasWeapon", hasWeapon);
+    }
+
+    protected override void ConfigureAttackBehaviour()
+    {
+        if (hasWeapon)
+        {
+            AttackBehaviour = new MeleeAttackBehaviour(weaponHitbox, weaponAttackRange);
+        }
+        else
+        {
+            UseFistAttack();
+        }
+    }
+
+    public void DropWeapon()
+    {
+        if (!hasWeapon) return;
+
+        hasWeapon = false;
+
+        if (weaponHitbox != null)
+            weaponHitbox.gameObject.SetActive(false);
+
+        UseFistAttack();
+    }
 }

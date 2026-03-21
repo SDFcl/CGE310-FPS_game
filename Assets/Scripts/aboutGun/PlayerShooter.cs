@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private Transform holdingItem;
+    [SerializeField] private Transform shottingPoint;
     public Gun CurrentGun { get; private set; }
     private PlayerPickup playerPickup;
     private PlayerThrowItem playerThrowItem;
@@ -48,6 +49,7 @@ public class PlayerShooter : MonoBehaviour
         Gun gun = holdingItem.GetComponentInChildren<Gun>();
          if (gun != CurrentGun)
             {
+                gun.SetShootPoint(shottingPoint);
                 CurrentGun = gun;
                 OnChangeGun?.Invoke(CurrentGun);
             }
