@@ -4973,8 +4973,8 @@ GameObject:
   - component: {fileID: 87418152640565819}
   - component: {fileID: 29336166522271367}
   - component: {fileID: 4409113754855264782}
-  - component: {fileID: 4399722288033724596}
   - component: {fileID: 512665605994711016}
+  - component: {fileID: 4432201800979046698}
   m_Layer: 6
   m_Name: Brick Throw
   m_TagString: Untagged
@@ -5048,20 +5048,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4399722288033724596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6952401588102581954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e55e72dea8213c4a9b6a72997651a46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  isTrigger: 0
 --- !u!114 &512665605994711016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5076,6 +5062,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 1972034926533128941}
   impactSound: {fileID: 5694846540501586675}
+--- !u!114 &4432201800979046698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6952401588102581954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a26983eaa559224abefc2f963176243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2112826429895364679
 PrefabInstance:
   m_ObjectHideFlags: 0

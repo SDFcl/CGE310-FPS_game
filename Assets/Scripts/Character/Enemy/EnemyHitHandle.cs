@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnemyHitHandle : MonoBehaviour,IDamageable,IStunable
 {
     public HealthSystem HealthSystem {get; private set;}
-    public Action OnStun;
+    public Action<bool> OnStun;
+    public bool canDrop;
     bool finishDrop;
     void Awake()
     {
@@ -21,12 +22,13 @@ public class EnemyHitHandle : MonoBehaviour,IDamageable,IStunable
     }
     public void ApplyStun()
     {
-        OnStun?.Invoke();
+        OnStun?.Invoke(canDrop);
         DropItem();
     }
 
     public void DropItem()
     {
+        if(!canDrop) return;
         ItemCanPickUp itemCanPickUp = GetComponentInChildren<ItemCanPickUp>();
         if (itemCanPickUp != null)
         {

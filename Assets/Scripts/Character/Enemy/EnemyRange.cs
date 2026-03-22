@@ -29,7 +29,7 @@ public class EnemyRange : Enemy
     void OnDisable()
     {
         enemyHit.OnStun -= DropWeapon;
-        enemyHit.HealthSystem.OnDied -= DropWeapon;
+        enemyHit.HealthSystem.OnDied -= () => DropWeapon(true);
     }
 
     protected override void Start()
@@ -40,7 +40,7 @@ public class EnemyRange : Enemy
             return;
 
         enemyHit.OnStun += DropWeapon;
-        enemyHit.HealthSystem.OnDied += DropWeapon;
+        enemyHit.HealthSystem.OnDied += () => DropWeapon(true);
 
         gun.SetShootPoint(shootingPoint);
         gun.SetAmmo(999999);
@@ -60,8 +60,9 @@ public class EnemyRange : Enemy
         }
     }
 
-    public void DropWeapon()
+    public void DropWeapon(bool canDrop)
     {
+        if (!canDrop) return;
         if (!hasWeapon) return;
 
         hasWeapon = false;
@@ -70,5 +71,12 @@ public class EnemyRange : Enemy
         gun.SetShootPoint(null);
         gun = null;
         UseFistAttack();
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

@@ -4,7 +4,7 @@ public class EnemyMelee : Enemy
 {
     [Header("Weapon Attack")]
     [SerializeField] private Collider weaponHitbox;
-    [SerializeField] private float weaponAttackRange = 2.5f;
+    [SerializeField] private float attackRange = 2.5f;
 
     [Header("State")]
     [SerializeField] private bool hasWeapon = true;
@@ -22,7 +22,7 @@ public class EnemyMelee : Enemy
     void OnDisable()
     {
         enemyHit.OnStun -= DropWeapon;
-        enemyHit.HealthSystem.OnDied -= DropWeapon;
+        enemyHit.HealthSystem.OnDied -= () => DropWeapon(true);
     }
 
     protected override void Start()
@@ -30,7 +30,7 @@ public class EnemyMelee : Enemy
         base.Start();
         
         enemyHit.OnStun += DropWeapon;
-        enemyHit.HealthSystem.OnDied += DropWeapon;
+        enemyHit.HealthSystem.OnDied += () => DropWeapon(true);
 
         Animator.SetBool("HasWeapon", hasWeapon);
     }
@@ -39,7 +39,7 @@ public class EnemyMelee : Enemy
     {
         if (hasWeapon)
         {
-            AttackBehaviour = new MeleeAttackBehaviour(weaponHitbox, weaponAttackRange);
+            AttackBehaviour = new MeleeAttackBehaviour(weaponHitbox, attackRange);
         }
         else
         {
@@ -47,8 +47,9 @@ public class EnemyMelee : Enemy
         }
     }
 
-    public void DropWeapon()
+    public void DropWeapon(bool canDrop)
     {
+        if(!canDrop) return;
         if (!hasWeapon) return;
 
         hasWeapon = false;
@@ -57,5 +58,12 @@ public class EnemyMelee : Enemy
             weaponHitbox.gameObject.SetActive(false);
 
         UseFistAttack();
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

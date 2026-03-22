@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        hitHandle.OnStun += StunEnemy;
+        hitHandle.OnStun += (bool canDrop) => StunEnemy();
         hitHandle.HealthSystem.OnDied += EnemyDie;
 
         SM.Initialize(IdleState);
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
 
     void OnDisable()
     {
-        hitHandle.OnStun -= StunEnemy;
+        hitHandle.OnStun -= (bool canDrop) => StunEnemy();
         hitHandle.HealthSystem.OnDied -= EnemyDie;
     }
 
@@ -198,20 +198,17 @@ public class Enemy : MonoBehaviour
         );
     }
 
-    void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         if (!showGizmos) return;
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, forceChaseRange);
 
-        if (Application.isPlaying && AttackBehaviour != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, AttackBehaviour.GetAttackRange());
-        }
-
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, idleRange);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, fistAttackRange);
     }
 }
