@@ -107,6 +107,6 @@ public class CenterRayInteract : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Gizmos.DrawRay(ray.origin, ray.direction * interactDistance);
         // แสดงทรงกลมปลาย ray (ประมาณจุดตรวจ)
-        Gizmos.DrawWireSphere(ray.origin + ray.direction * interactDistance * 0.5f, detectRadius);
+        Gizmos.DrawWireSphere(ray.origin + ray.direction * interactDistance, detectRadius);
     }
 }

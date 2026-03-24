@@ -37,6 +37,9 @@ public class Enemy : MonoBehaviour
     private float fistRotateSpeed = 360f;
     private float fistFacingThreshold = 5f;
 
+    [Header("Comic Effect")]
+    [SerializeField] private GameObject comicEffect;
+
     public Collider FistHitbox => fistHitbox;
     public float FistAttackRange => fistAttackRange;
 
@@ -57,6 +60,8 @@ public class Enemy : MonoBehaviour
         Animator = GetComponent<Animator>();
 
         hitHandle = GetComponent<EnemyHitHandle>();
+
+        comicEffect.SetActive(false);
 
         ConfigureAttackBehaviour();
     }
@@ -108,11 +113,13 @@ public class Enemy : MonoBehaviour
     {
         if (hitHandle.HealthSystem.CurrentHP > 0)
             SM.ChangeState(StunState);
+            comicEffect.SetActive(true);
     }
 
     public void EnemyDie()
     {
         SM.ChangeState(DeathState);
+        comicEffect.SetActive(false);
     }
 
     public void Animation_AttackHit()
@@ -136,6 +143,7 @@ public class Enemy : MonoBehaviour
         if (SM.CurrentState == StunState)
         {
             StunState.OnStunEnd(this);
+            comicEffect.SetActive(false);
         }
     }
 

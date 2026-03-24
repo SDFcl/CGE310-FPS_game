@@ -11,6 +11,8 @@ public class Gun : ItemCanPickUp
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private Transform shootPoint;
 
+    [SerializeField] private GameObject comicEffect;
+
     private float fireTimer;
 
     int currentAmmo;
@@ -45,28 +47,28 @@ public class Gun : ItemCanPickUp
         
     }
 
-    public void Shoot()
+    public bool Shoot()
     {
-        if(fireTimer > 0f) return;
+        if(fireTimer > 0f) return false;
 
         fireTimer = fireRate;
 
         if (shootPoint == null)
         {
             Debug.LogWarning("shootPoint is null"); //เช็คว่ามีจุดยิงมั้ย
-            return;
+            return false;
         }
 
         if(ObjectPooler.Instance == null)
         {
             Debug.LogError("ObjectPooler not found"); //เช็คว่ามี ObjectPool มั้ย
-            return;
+            return false;
         }
 
         if(currentAmmo <= 0)
         {
             OnAmmoRunOut?.Invoke();
-            return;
+            return false;
         } 
 
         GameObject bulletObj = ObjectPooler.Instance.SpawnFromPool(
@@ -81,6 +83,8 @@ public class Gun : ItemCanPickUp
 
         currentAmmo --;
         OnAmmoChange?.Invoke(currentAmmo);
+        StartCoroutine(ComicEffect());
+        return true;
     }
 
     public void SetShootPoint(Transform point)
@@ -91,5 +95,15 @@ public class Gun : ItemCanPickUp
     public void SetAmmo(int setammo)
     {
         currentAmmo = setammo;
+    }
+
+    IEnumerator ComicEffect()
+    {
+        if (comicEffect != null)
+        {
+            comicEffect.SetActive(true);
+            yield return new WaitForSeconds(fireRate - 0.1f);
+            comicEffect.SetActive(false);
+        }
     }
 }
