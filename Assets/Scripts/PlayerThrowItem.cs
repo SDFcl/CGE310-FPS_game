@@ -6,6 +6,7 @@ public class PlayerThrowItem : MonoBehaviour
     public PlayerPickup showItem;
     public float throwForce = 10f;
 
+  
     public Transform throwPoint;
     public Action OnThrow;
 
@@ -44,8 +45,9 @@ public class PlayerThrowItem : MonoBehaviour
 
         ItemCanPickUp itemCanPickUp = item.GetComponent<ItemCanPickUp>();
         Destroy(item);
-
-        GameObject obj = Instantiate(itemCanPickUp.throwablePrefab, throwPoint.position, throwPoint.rotation);
+         Animator anim = GetComponentInChildren<Animator>();
+        anim.SetTrigger("Throw");
+         GameObject obj = Instantiate(itemCanPickUp.throwablePrefab, throwPoint.position, throwPoint.rotation);
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         if (rb == null)
         {

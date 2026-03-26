@@ -9,7 +9,7 @@ public class PlayerPickup : MonoBehaviour
     public Transform itemHoldPoint;
 
     public Action OnPickup;
-
+    
     public bool setItem(GameObject item)
     {
         if (!_isPickup)
@@ -45,7 +45,7 @@ public class PlayerPickup : MonoBehaviour
     public GameObject TakeItem()
     {
         if (!_isPickup) return null;
-
+       
         GameObject item = itemHolder;
 
         itemHolder = null;

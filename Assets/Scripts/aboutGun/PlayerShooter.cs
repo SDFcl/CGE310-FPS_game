@@ -9,10 +9,14 @@ public class PlayerShooter : MonoBehaviour
     private PlayerPickup playerPickup;
     private PlayerThrowItem playerThrowItem;
     public Action<Gun> OnChangeGun;
+
+  
     void Awake()
     {
         playerPickup = GetComponent<PlayerPickup>();
         playerThrowItem = GetComponent<PlayerThrowItem>();
+      
+
         // ถ้าไม่ได้ assign ใน Inspector
         if (holdingItem == null)
         {
@@ -37,19 +41,27 @@ public class PlayerShooter : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (CurrentGun != null)
+            {
                 CurrentGun.Shoot();
+             
+            }
+                
+         
         }
     }
 
     void PickGun()
     {
         Gun gun = holdingItem.GetComponentInChildren<Gun>();
-         if (gun != CurrentGun)
-            {
-                gun.SetShootPoint(shottingPoint);
+        
+      
+        if (gun != CurrentGun)
+        {
+          
+            gun.SetShootPoint(shottingPoint);
                 CurrentGun = gun;
                 OnChangeGun?.Invoke(CurrentGun);
             }

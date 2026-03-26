@@ -31366,6 +31366,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.36666667
+    functionName: ShootSFX
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: db7565a8c18de9345b49f2670d921c32, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.1666666
     functionName: Animation_AttackEnd
     data: 

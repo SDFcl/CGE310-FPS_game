@@ -24,11 +24,14 @@ public class CenterRayInteract : MonoBehaviour
         {
             Iinteractable active = currentTarget.GetComponent<Iinteractable>();
             ItemCanPickUp _itemCanPickUp = currentTarget.GetComponent<ItemCanPickUp>();
+             Animator anim;
+            
             if (active != null && _itemCanPickUp != null && active.ActiveReturn())
             {
                 _itemCanPickUp.Success();
                 _itemCanPickUp = null;
                 currentTarget = null;
+               
             }
         }
         if (Input.GetKeyDown(KeyCode.E) && currentTarget != null)
