@@ -1,42 +1,62 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerGunHUD : MonoBehaviour
 {
+    [Header("Text")]
     [SerializeField] private TextMeshProUGUI ammoText;
+
+    [Header("Shooter")]
     [SerializeField] private PlayerShooter playerShooter;
 
-    Gun currentGun;
+    [Header("Ammo UI")]
+    [SerializeField] private RectTransform ammoContainer;
+    [SerializeField] private Image ammoBarPrefab;
+
+    private readonly List<Image> ammoBars = new();
+
+    private Gun currentGun;
+
     void Awake()
     {
         if (playerShooter == null)
         {
             playerShooter = FindAnyObjectByType<PlayerShooter>();
-            if(playerShooter == null)
+
+            if (playerShooter == null)
             {
-                Debug.Log("Scene dont have player");
+                Debug.LogError("Scene dont have PlayerShooter");
             }
         }
+
+        ClearContainerChildren();
     }
 
     void Start()
     {
-        ammoText.text = "";
+        if (ammoText != null)
+            ammoText.text = "";
     }
 
     void OnEnable()
     {
-        playerShooter.OnChangeGun += OnGunChanged;
+        if (playerShooter != null)
+            playerShooter.OnChangeGun += OnGunChanged;
     }
 
     void OnDisable()
     {
-        playerShooter.OnChangeGun -= OnGunChanged;
+        if (playerShooter != null)
+            playerShooter.OnChangeGun -= OnGunChanged;
+
+        if (currentGun != null)
+            currentGun.OnAmmoChange -= AmmoChange;
     }
 
     void OnGunChanged(Gun gun)
     {
-        // ถ้ามีปืนเก่า
         if (currentGun != null)
             currentGun.OnAmmoChange -= AmmoChange;
 
@@ -44,19 +64,77 @@ public class PlayerGunHUD : MonoBehaviour
 
         if (currentGun == null)
         {
-            ammoText.text = "";
+            if (ammoText != null)
+                ammoText.text = "";
+
+            ClearBars();
             return;
         }
 
-        // subscribe ammo change
         currentGun.OnAmmoChange += AmmoChange;
 
-        // แสดง ammo ตอนหยิบปืน
+        BuildAmmoUI(currentGun.AmmoAmount);
         AmmoChange(currentGun.CurrentAmmo);
     }
 
     void AmmoChange(int ammo)
     {
-        ammoText.text = $"Ammo : {ammo}";
+        if (ammoText != null)
+            ammoText.text = $"{ammo} / {currentGun.AmmoAmount}";
+
+        if (currentGun != null)
+            UpdateAmmoBars(ammo, currentGun.AmmoAmount);
+    }
+
+    void BuildAmmoUI(int maxAmmo)
+    {
+        ClearBars();
+        ClearContainerChildren();
+
+        for (int i = 0; i < maxAmmo; i++)
+        {
+            Image bar = Instantiate(ammoBarPrefab, ammoContainer);
+            bar.gameObject.SetActive(true);
+            ammoBars.Add(bar);
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ammoContainer);
+    }
+
+    void UpdateAmmoBars(int currentAmmo, int maxAmmo)
+    {
+        currentAmmo = Mathf.Clamp(currentAmmo, 0, maxAmmo);
+
+        for (int i = 0; i < ammoBars.Count; i++)
+        {
+            int indexFromTop = ammoBars.Count - 1 - i;
+            bool show = indexFromTop < currentAmmo;
+            ammoBars[i].gameObject.SetActive(show);
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ammoContainer);
+    }
+
+    void ClearBars()
+    {
+        for (int i = 0; i < ammoBars.Count; i++)
+        {
+            if (ammoBars[i] != null)
+                Destroy(ammoBars[i].gameObject);
+        }
+
+        ammoBars.Clear();
+    }
+
+    void ClearContainerChildren()
+    {
+        if (ammoContainer == null) return;
+
+        for (int i = ammoContainer.childCount - 1; i >= 0; i--)
+        {
+            Destroy(ammoContainer.GetChild(i).gameObject);
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ammoContainer);
     }
 }
