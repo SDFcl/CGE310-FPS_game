@@ -67,7 +67,7 @@ public class EnemyRange : Enemy
 
         hasWeapon = false;
 
-        gun.SetAmmo(10);
+        gun.SetAmmo(gun.AmmoAmount);
         gun.SetShootPoint(null);
         gun = null;
         UseFistAttack();
