@@ -21,6 +21,7 @@ public class EnemyMelee : Enemy
     }
     void OnDisable()
     {
+        weaponHitbox.gameObject.SetActive(false);
         enemyHit.OnStun -= DropWeapon;
         enemyHit.HealthSystem.OnDied -= () => DropWeapon(true);
     }
