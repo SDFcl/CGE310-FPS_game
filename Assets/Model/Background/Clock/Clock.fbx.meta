@@ -3,7 +3,17 @@ guid: 6221e9507f466974e9507fef7f2c0756
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clock
+    second: {fileID: 2100000, guid: ba3535e21bf0ef147a3b5536803406ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pendulumClock
+    second: {fileID: 2100000, guid: dfd7d5e8bdc891f47be1057737131e22, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

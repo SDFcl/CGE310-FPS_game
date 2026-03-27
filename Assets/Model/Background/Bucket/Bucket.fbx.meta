@@ -3,7 +3,12 @@ guid: 9e07c31a05492464c9c2adb3df65c992
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Waterbuket
+    second: {fileID: 2100000, guid: c8d72263756d5fa4f9f60bcc5c306f74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
