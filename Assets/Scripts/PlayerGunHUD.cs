@@ -12,10 +12,10 @@ public class PlayerGunHUD : MonoBehaviour
         if (playerShooter == null)
         {
             playerShooter = FindAnyObjectByType<PlayerShooter>();
-        }
-        else
-        {
-            Debug.Log("Scene dont have player");
+            if(playerShooter == null)
+            {
+                Debug.Log("Scene dont have player");
+            }
         }
     }
 
