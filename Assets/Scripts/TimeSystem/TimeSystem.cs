@@ -19,6 +19,19 @@ public class TimeSystem : MonoBehaviour
 
     void Awake()
     {
+        if (playerReference == null)
+        {
+            var player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                playerReference = player.GetComponent<MonoBehaviour>();
+            } 
+            else
+            {
+                Debug.Log("Scene dont have player");
+            }
+        }
+        
         activity = playerReference.GetComponent<IPlayerActivity>();
         baseFixedDeltaTime = Time.fixedDeltaTime;
     }

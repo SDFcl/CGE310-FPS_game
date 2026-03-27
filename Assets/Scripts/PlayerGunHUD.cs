@@ -7,6 +7,17 @@ public class PlayerGunHUD : MonoBehaviour
     [SerializeField] private PlayerShooter playerShooter;
 
     Gun currentGun;
+    void Awake()
+    {
+        if (playerShooter == null)
+        {
+            playerShooter = FindAnyObjectByType<PlayerShooter>();
+        }
+        else
+        {
+            Debug.Log("Scene dont have player");
+        }
+    }
 
     void Start()
     {
