@@ -68,6 +68,7 @@ public class LineOfSight : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if(!showGizmos) return;
+        if (target == null) return;
 
         //DetectRange
         Gizmos.color = Color.yellow;
