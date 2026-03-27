@@ -385,6 +385,7 @@ MonoBehaviour:
   fistHitbox: {fileID: 7399240394499004496}
   fistAttackRange: 1.5
   comicEffect: {fileID: 1225111373620727412}
+  DeathSound: {fileID: 8300000, guid: 2f5bdc8805f1cc340959f8fe8510a5e3, type: 3}
   gun: {fileID: 291908481378744371}
   shootingPoint: {fileID: 6885168178307678553}
   attackRange: 10
@@ -413,7 +414,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -39,7 +39,10 @@ public class Enemy : MonoBehaviour
 
     [Header("Comic Effect")]
     [SerializeField] private GameObject comicEffect;
-
+    
+    [Header("SFX")]
+    private SoundHandle soundHandle;
+    [SerializeField] private AudioClip DeathSound;
     public Collider FistHitbox => fistHitbox;
     public float FistAttackRange => fistAttackRange;
 
@@ -62,7 +65,7 @@ public class Enemy : MonoBehaviour
         hitHandle = GetComponent<EnemyHitHandle>();
 
         comicEffect.SetActive(false);
-
+        soundHandle = GetComponent<SoundHandle>();
         ConfigureAttackBehaviour();
     }
 
@@ -120,6 +123,7 @@ public class Enemy : MonoBehaviour
     {
         SM.ChangeState(DeathState);
         comicEffect.SetActive(false);
+        soundHandle.AudioSFX(DeathSound);
     }
 
     public void Animation_AttackHit()

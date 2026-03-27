@@ -1,7 +1,9 @@
 using UnityEngine;
 
+
 public class SoundHandle : MonoBehaviour
 {
+    
     private AudioSource audioSource;
    private Gun gun;
 
@@ -15,10 +17,13 @@ public class SoundHandle : MonoBehaviour
             //Debug.Log("IKD");
         }
     }
-
+    public void PlayAudiosource()
+    {
+        audioSource.Play();
+    }
     public void AudioSFX(AudioClip clip)
     {
-
+      
         audioSource.PlayOneShot(clip);
     }
     public void ShootSFX(AudioClip clip)

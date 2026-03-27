@@ -286,6 +286,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3710612047035440607, guid: b75aafae5b0553a40929b62a5983495f, type: 3}
+      propertyPath: DeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e6bf7213b10fd0f4da9d696cbe76b5c9, type: 3}
+    - target: {fileID: 3710612047035440607, guid: b75aafae5b0553a40929b62a5983495f, type: 3}
       propertyPath: fistHitbox
       value: 
       objectReference: {fileID: 8491151972258444536}
