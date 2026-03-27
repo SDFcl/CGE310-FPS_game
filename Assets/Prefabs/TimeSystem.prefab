@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8591099191123843816}
   m_Layer: 0
   m_Name: TimeSystem
-  m_TagString: Untagged
+  m_TagString: TimeSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
