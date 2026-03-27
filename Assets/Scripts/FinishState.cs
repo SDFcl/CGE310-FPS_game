@@ -7,9 +7,12 @@ public class FinishState : MonoBehaviour
 
     public GameObject TriggerZone;
 
+    public GameObject Guide;
+
     private void Awake()
     {
         TriggerZone.SetActive(false);
+        Guide.SetActive(false);
         healthSystems.Clear();
 
         var found = FindObjectsOfType<EnemyHitHandle>(true);
@@ -28,6 +31,7 @@ public class FinishState : MonoBehaviour
         if (healthSystems.Count == 0)
         {
             TriggerZone.SetActive(true);
+            Guide.SetActive(true);
         }
         foreach (var healthSystem in healthSystems)
         {
