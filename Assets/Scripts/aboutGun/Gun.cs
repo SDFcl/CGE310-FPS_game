@@ -20,6 +20,7 @@ public class Gun : ItemCanPickUp
     
     public Action<int> OnAmmoChange;
     public Action OnAmmoRunOut;
+    public Action Onfire;
 
 
     protected override void Awake()
@@ -83,6 +84,7 @@ public class Gun : ItemCanPickUp
 
         currentAmmo --;
         OnAmmoChange?.Invoke(currentAmmo);
+        Onfire?.Invoke();
         StartCoroutine(ComicEffect());
         return true;
     }
