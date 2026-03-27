@@ -20,18 +20,18 @@ public class CenterRayInteract : MonoBehaviour
     void Update()
     {
         DetectNearestInteractable();
+
         if (Input.GetKeyDown(keybindPickup) && currentTarget != null)
         {
             Iinteractable active = currentTarget.GetComponent<Iinteractable>();
             ItemCanPickUp _itemCanPickUp = currentTarget.GetComponent<ItemCanPickUp>();
-             Animator anim;
-            
+
             if (active != null && _itemCanPickUp != null && active.ActiveReturn())
             {
                 _itemCanPickUp.Success();
                 _itemCanPickUp = null;
                 currentTarget = null;
-               
+
             }
         }
         if (Input.GetKeyDown(KeyCode.E) && currentTarget != null)
@@ -41,6 +41,24 @@ public class CenterRayInteract : MonoBehaviour
             if (active != null && _objCanInteract != null)
             {
                 _objCanInteract.ActiveReturn();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.E) && currentTarget != null)
+        {
+            HoldObjInteractable _holdObj = currentTarget.GetComponent<HoldObjInteractable>();
+            if (_holdObj != null)
+            {
+                _holdObj.ResetHold(); // เรียกฟังก์ชันรีเซ็ตที่เราจะสร้างใหม่
+            }
+        }
+        if (Input.GetKey(KeyCode.E) && currentTarget != null)
+        {
+            Iinteractable active = currentTarget.GetComponent<Iinteractable>();
+            HoldObjInteractable _holdObjInteractable = currentTarget.GetComponent<HoldObjInteractable>();
+            if (active != null && _holdObjInteractable != null && _holdObjInteractable.ActiveReturn())
+            {
+                _holdObjInteractable.Success();
             }
         }
     }
@@ -112,4 +130,5 @@ public class CenterRayInteract : MonoBehaviour
         // แสดงทรงกลมปลาย ray (ประมาณจุดตรวจ)
         Gizmos.DrawWireSphere(ray.origin + ray.direction * interactDistance, detectRadius);
     }
+
 }
