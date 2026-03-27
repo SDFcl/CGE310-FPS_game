@@ -30,7 +30,6 @@ public class BossDieCutsceneOnly : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(enemyHitHandle.HealthSystem.IsDead);
         
         if (enemyHitHandle.HealthSystem.IsDead && !onAction)
         {

@@ -29,11 +29,14 @@ public class MeleeHit : MonoBehaviour
         // 🔥 กันโดนตัวเอง (ทั้งตัว + ลูกทั้งหมด)
         if (col.transform.root == ownerRoot|| col.gameObject.CompareTag(ownerRoot.tag)) return;
 
+        //if (!col.gameObject.CompareTag("Player") && !ownerRoot.CompareTag("Player")) return;
+
         // 🔥 หา IDamageable จาก parent (สำคัญมาก)
         IDamageable damageable = col.GetComponentInParent<IDamageable>();
 
         if (damageable != null)
         {
+            Debug.Log($"Hit {col.name} with damage {damage}");
             damageable.TakeDamage(damage);
         }
     }
