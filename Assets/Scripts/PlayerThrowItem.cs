@@ -38,7 +38,7 @@ public class PlayerThrowItem : MonoBehaviour
 
     }*/
 
-    void Throw()
+    public void Throw()
     {
         GameObject item = showItem.TakeItem();
         if (item == null) return;
