@@ -21,6 +21,7 @@ public class FirstPersonController : MonoBehaviour
     #region Camera Movement Variables
 
     public Camera playerCamera;
+    public GameObject ParenCam;
 
     public float fov = 60f;
     public bool invertCamera = false;
@@ -184,7 +185,8 @@ public class FirstPersonController : MonoBehaviour
             pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
 
             transform.localEulerAngles = new Vector3(0, yaw, 0);
-            playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+            ParenCam.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+            
         }
 
         #region Camera Zoom
@@ -522,6 +524,7 @@ public class FirstPersonController : MonoBehaviour
         EditorGUILayout.Space();
 
         fpc.playerCamera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Camera", "Camera attached to the controller."), fpc.playerCamera, typeof(Camera), true);
+        fpc.ParenCam = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Camera Parent", "GameObject parent of the camera, used for camera rotation."), fpc.ParenCam, typeof(GameObject), true);
         fpc.fov = EditorGUILayout.Slider(new GUIContent("Field of View", "The camera’s view angle. Changes the player camera directly."), fpc.fov, fpc.zoomFOV, 179f);
         fpc.cameraCanMove = EditorGUILayout.ToggleLeft(new GUIContent("Enable Camera Rotation", "Determines if the camera is allowed to move."), fpc.cameraCanMove);
 
