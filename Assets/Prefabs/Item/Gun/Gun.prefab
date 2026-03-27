@@ -175,7 +175,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   throwablePrefab: {fileID: 1051407863505211360, guid: 59f1b5f08555c87488fa2090d2ee1c25, type: 3}
-  ammoAmount: 10
+  ammoAmount: 6
   damage: 1
   fireRate: 0.25
   shootPoint: {fileID: 0}
