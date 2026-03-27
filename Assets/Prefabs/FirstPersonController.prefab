@@ -135,8 +135,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4242135095608794644}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00000017881393, z: 0}
+  m_LocalRotation: {x: 0, y: 0.70263356, z: 0, w: 0.7115519}
+  m_LocalPosition: {x: -1.725, y: -0.19310719, z: -2.986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5744140474318136527}
   ParenCam: {fileID: 2408069030772333095}
-  fov: 75
+  fov: 80
   invertCamera: 0
   cameraCanMove: 1
   mouseSensitivity: 2
@@ -540,7 +540,7 @@ MonoBehaviour:
   sprintSpeed: 15.06
   sprintDuration: 5
   sprintCooldown: 0.5
-  sprintFOV: 60
+  sprintFOV: 89
   sprintFOVStepTime: 10
   useSprintBar: 0
   hideBarWhenFull: 0
