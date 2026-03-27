@@ -1,9 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDamageHandle : MonoBehaviour,IDamageable
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHP;
+    private SoundHandle sound;
+    [SerializeField] private AudioClip DeathSound;
     public HealthSystem Health{get; private set;}
     void Awake()
     {
@@ -34,7 +37,8 @@ public class PlayerDamageHandle : MonoBehaviour,IDamageable
 
     public void PlayerDie()
     {
-        // Player Die Logic Here
+        sound = GetComponent<SoundHandle>();
+        sound.AudioSFX(DeathSound);
         Debug.Log("Player is Die");
     }
 
