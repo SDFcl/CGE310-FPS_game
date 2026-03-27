@@ -12,7 +12,7 @@ public class SoundHandle : MonoBehaviour
         gun = GetComponentInChildren<Gun>();
         if (gun == null)
         {
-            Debug.Log("IKD");
+            //Debug.Log("IKD");
         }
     }
 
