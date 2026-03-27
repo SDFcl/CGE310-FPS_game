@@ -17,6 +17,7 @@ public class Gun : ItemCanPickUp
 
     int currentAmmo;
     public int CurrentAmmo => currentAmmo;
+    public int AmmoAmount => ammoAmount;
     
     public Action<int> OnAmmoChange;
     public Action OnAmmoRunOut;
