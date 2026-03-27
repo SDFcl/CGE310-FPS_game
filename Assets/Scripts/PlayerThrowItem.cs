@@ -5,6 +5,7 @@ public class PlayerThrowItem : MonoBehaviour
 {
     public PlayerPickup showItem;
     public float throwForce = 10f;
+    public KeyCode keybindThrow = KeyCode.F;
 
   
     public Transform throwPoint;
@@ -12,7 +13,7 @@ public class PlayerThrowItem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // �Ҵ��»��� G
+        if (Input.GetKeyDown(keybindThrow)) // �Ҵ��»��� G
         {
             Throw();
         }

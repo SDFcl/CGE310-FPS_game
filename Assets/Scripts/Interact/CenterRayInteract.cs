@@ -6,10 +6,10 @@ public class CenterRayInteract : MonoBehaviour
     public float interactDistance = 5f;       // ระยะตรวจจับสูงสุด
     public float detectRadius = 0.5f;         // รัศมีตรวจรอบจุดเล็ง
     public LayerMask interactableLayer;
+    public KeyCode keybindPickup = KeyCode.E;
 
     [Header("Debug")]
     public GameObject currentTarget;
-
     public Camera cam;
 
     void Start()
@@ -20,7 +20,7 @@ public class CenterRayInteract : MonoBehaviour
     void Update()
     {
         DetectNearestInteractable();
-        if (Input.GetKeyDown(KeyCode.F) && currentTarget != null)
+        if (Input.GetKeyDown(keybindPickup) && currentTarget != null)
         {
             Iinteractable active = currentTarget.GetComponent<Iinteractable>();
             ItemCanPickUp _itemCanPickUp = currentTarget.GetComponent<ItemCanPickUp>();
