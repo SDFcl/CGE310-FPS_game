@@ -514,7 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5744140474318136527}
   ParenCam: {fileID: 2408069030772333095}
-  fov: 60
+  fov: 75
   invertCamera: 0
   cameraCanMove: 1
   mouseSensitivity: 2
@@ -537,7 +537,7 @@ MonoBehaviour:
   sprintSpeed: 10
   sprintDuration: 5
   sprintCooldown: 0.5
-  sprintFOV: 60
+  sprintFOV: 75
   sprintFOVStepTime: 10
   useSprintBar: 1
   hideBarWhenFull: 0
